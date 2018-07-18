@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru">
+   <head>
+      <title>Задания для Frontend разработчика Пикабу 2018</title>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+   <body>
+      <section>
+         <div id="survey">
+            <blockquote>Вам необходимо знать JS, HTML5, CSS и обязательно добрую старую библиотеку jQuery ;) Хотя бы немножко знать о LESS, SASS, ECMAScript 6, Node.js, Gulp, Webpack, Underscore, JSDoc, VCS. Желать пользователям добра и лучшего UX.</blockquote>
+            <p>
+               Дан фрагмент HTML. Используя только нативный JavaScript исправьте текст, следующий после тега <code>&lt;span&gt;</code> так, чтобы элемент <code>&lt;span&gt;</code> остался незатронутым
+            </p>
+            <pre class="language-html"><code>&lt;div class=&quot;example&quot;&gt;Дважды &lt;span&gt;два&lt;/span&gt; - пять&lt;/div&gt;</code></pre>
+            <p>
+               <b>15.</b> Предположим в наследство Вам достался следующий код. Максимально упростите его с использованием библиотеки jQuery
+            </p>
+            <pre class="language-js"&gt;<code>document.getElementById('x1')
+            .getElementsByTagName('div')[4]
+            .closest('#x1 &gt; div').parentNode
+            .childNodes[2].firstChild
+            .querySelect('*[id="f"]')
+            .textContent = 'Hello!';</code></pre>
+            <p>
+               <b>16.</b> Используя регулярные выражения (RegExp) проверьте на валидность введенный пользователем URL (пусть это будет переменная <code>url</code>) по следующим критериям:
+            </p>
+            <ul>
+               <li>разрешенные протоколы: http, https, а также ftp;</li>
+               <li>URL может иметь один из следующих поддоменов (3го уровня) m, m-test, c1...c100;</li>
+               <li>домен второго уровня строго задан "pikabu";</li>
+               <li>URL может иметь порт 8080;</li>
+               <li>URL не может иметь путь, параметры и якорь.</li>
+            </ul>
+            <br>
+            <p>
+               Пример URL валидный по заданным критериям: <code>https://c52.pikabu.lh:8080</code>
+            </p>
+            <p>
+               <b>17.</b> Предложите стили (LESS или SASS) для списка ниже, чтобы привести его к виду, как показано на скриншоте:
+            </p>
+            <pre class="language-html"><code>&lt;div class=&quot;example&quot;&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Item 1&lt;/li&gt;
+        &lt;li&gt;Item 2
+            &lt;ul&gt;
+                &lt;li data-value=&quot;1&quot;&gt;sub-item&lt;/li&gt;
+                &lt;li data-value=&quot;2&quot;&gt;sub-item&lt;/li&gt;
+                &lt;li data-value=&quot;3&quot;&gt;sub-item&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Item 3
+            &lt;ul&gt;
+                &lt;li data-value=&quot;4&quot;&gt;sub-item&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+            <img src="https://cs10.pikabu.ru/images/previews_comm/2018-04_3/1523562799194851279.png" alt=""><br>
+            <p>
+               <b>18.</b> Имеется строка <code>str</code> с произвольным текстом. Необходимо без использования циклов (for, while, do) и объявления дополнительных переменных, посчитать количество символов в строке, у которых ASCII код кратный 3. Напишите по возможности наиболее компактный код.
+            </p>
+            <p>
+               <b>19.</b> Дан массив целых чисел <code>input</code>. Необходимо написать функцию, которая преобразует массив <code>input</code> так, чтобы он удовлетворял следующим условиям:
+            </p>
+            <ul>
+               <li>вначале числа кратные двум, от наибольшего к наименьшему;</li>
+               <li>затем оставшиеся числа от наименьшего к наибольшему.</li>
+            </ul>
+            <pre class="language-js"><code>let input = [-2, 2, 4, 6, 8, 10, 3, 5, 7, 9, -1, -11];
+func(input); // [ 10, 8, 6, 4, 2, -2, -11, -1, 3, 5, 7, 9 ]</code></pre>
+            <p>
+               <b>20.</b> Предложите вариант базового класса для успешной работы следующего кода
+            </p>
+            <pre class="language-js"><code>class BaseClass {
+    // ... ваш код
+}
+class MyClass extends BaseClass {
+    result(a, b) {
+        this.a = a;
+        this.b = b;
+        return 100 - this.a + this.b;
+    }
+}
+let m = new MyClass();
+m.result(10, 20) === 90;
+m.result(20, 10) === 110;</code></pre>
+            <p>
+               <b>21.</b> Предложите, на ваш взгляд, наилучший вариант селектора к элементу ниже, для отображения текста чёрным цветом, учитывая, что ваш селектор расположен в самом начале следующих стилей
+            </p>
+            <pre class="language-html"><code>&lt;section class=&quot;section&quot; id=&quot;section&quot;&gt;Зелёный текст&lt;/section&gt;</code></pre>
+            <pre class="language-css"><code>// &lt;-- Ваш селектор
+
+// ....
+
+section.section {color: red}
+.section {color: green}
+section#section {color: yellow}
+section#section.section {color: pink}
+section.section {color: red}</code></pre>
+            <p>
+               <b>22.</b> Предположим вам по наследству достался код с обильной избыточностью. <u>Максимально</u> упростите код (сократите или удалите ненужные операции), сохранив его логику.
+            </p>
+            <pre class="language-js">
+			<code>const f = (x) =&gt; {
+	let data,
+		x2 = new Number(`+${x}`),
+		x3 = x / {toNumber() {return 5}};
+	data = {
+		isX: x3 === x3,
+		d: Boolean(34),
+		n: x === x2,
+	};
+	if (!!data.isX ? data.d : data.n) {
+		return Math.ceil(x) &gt;&gt; x2;
+	} else {
+		return (Math.trunc(x) &lt;&lt; 0) ** 0b10;
+	}
+};</code></pre>
+         </div>
+      </section>
+   </body>
+</html>
