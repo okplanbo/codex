@@ -63,7 +63,7 @@
                <b>1.</b> Дан фрагмент HTML. Используя только нативный JavaScript исправьте текст, следующий после тега <code>&lt;span&gt;</code> так, чтобы элемент <code>&lt;span&gt;</code> остался незатронутым
             </p>
             <pre class="language-html"><code>&lt;div class=&quot;example&quot;&gt;Дважды &lt;span&gt;два&lt;/span&gt; - пять&lt;/div&gt;</code></pre>
-            <p><b>Ответ:</b></p>
+            <p><b>Решение:</b></p>
 			<pre class="language-js answer"><code>var elem = document.getElementsByClassName('example')[0]
 elem.lastChild.nodeValue = ' - четыре'</code></pre>
 			
@@ -76,15 +76,14 @@ elem.lastChild.nodeValue = ' - четыре'</code></pre>
             .childNodes[2].firstChild
             .querySelect('*[id="f"]')
             .textContent = 'Hello!';</code></pre>
-            <p>
-			<p><b>Ответ:</b></p>
+			<p><b>Решение:</b></p>
 			<pre class="language-js answer"><code>//childNodes[2] и children(':eq(2)') будут работать одинаково если в html разметке не было лишних символов между тегами
 
 $('#x1 > div').eq(4)
 			  .parent('div#x1').children(':eq(2)')
 			  .children(':first-child')
 			  .find('#f').text('Hello!');</code></pre>
-			
+			<p>
                <b>3.</b> Используя регулярные выражения (RegExp) проверьте на валидность введенный пользователем URL (пусть это будет переменная <code>url</code>) по следующим критериям:
             </p>
             <ul>
@@ -98,6 +97,37 @@ $('#x1 > div').eq(4)
             <p>
                Пример URL валидный по заданным критериям: <code>https://c52.pikabu.lh:8080</code>
             </p>
+			<p><b>Решение:</b></p>
+			<pre class="language-js answer"><code>function validate(url) {
+	let r = /^(ftp|https?):\/\/((c[1-9][0-9]?|m|m-test)\.)?pikabu\.[a-zA-Z\-]{2,64}(:8080)?$/;
+	return r.test(url);
+}
+
+// test!
+
+// good cases:
+console.log('https://c52.pikabu.lh:8080 ' + validate('https://c52.pikabu.lh:8080'));
+console.log('http://c52.pikabu.lh:8080 ' + validate('http://c52.pikabu.lh:8080'));
+console.log('ftp://c52.pikabu.lh:8080 ' + validate('ftp://c52.pikabu.lh:8080'));
+console.log('http://m.pikabu.lh:8080 ' + validate('http://m.pikabu.lh:8080'));
+console.log('http://m-test.pikabu.lh:8080 ' + validate('http://m-test.pikabu.lh:8080'));
+console.log('http://c82.pikabu.lh:8080 ' + validate('http://c82.pikabu.lh:8080'));
+console.log('http://c82.pikabu.lh:8080 ' + validate('http://c82.pikabu.lh:8080'));
+console.log('http://c82.pikabu.lh ' + validate('http://c82.pikabu.lh'));
+console.log('http://c82.pikabu.ru ' + validate('http://c82.pikabu.ru'));
+console.log('http://pikabu.ru ' + validate('http://pikabu.ru'));
+
+// bad cases:
+console.log('sftp://c52.pikabu.lh:8080 ' + validate('sftp://c52.pikabu.lh:8080'));
+console.log('ftp://c52.pikabu.lh:8081 ' + validate('ftp://c52.pikabu.lh:8081'));
+console.log('ftp://k.pikabu.lh:8080 ' + validate('ftp://k.pikabu.lh:8080'));
+console.log('ftp://k-test.pikabu.lh:8080 ' + validate('ftp://k-test.pikabu.lh:8080'));
+console.log('ftp://c102.pikabu.lh:8080 ' + validate('ftp://c102.pikabu.lh:8080'));
+console.log('http://c10.pikobu.lh:8080 ' + validate('http://c10.pikobu.lh:8080'));
+console.log('http://c10..org:8080 ' + validate('http://c10..org:8080'));
+console.log('http://pikabu.org:8080/page ' + validate('http://pikabu.org:8080/page'));
+console.log('http://pikabu.org:8080?param=true ' + validate('http://pikabu.org:8080?param=true'));
+console.log('http://pikabu.ru#section_one ' + validate('http://pikabu.ru#section_one'));</code></pre>
             <p>
                <b>4.</b> Предложите стили (LESS или SASS) для списка ниже, чтобы привести его к виду, как показано на скриншоте:
             </p>
@@ -119,9 +149,59 @@ $('#x1 > div').eq(4)
     &lt;/ul&gt;
 &lt;/div&gt;</code></pre>
             <img src="img/1523562799194851279.png" alt=""><br>
+			<p><b>Решение:</b></p>
+			<pre class="language-css answer"><code>.example ul {
+  list-style: disk;
+  
+  li:first-child {
+    font-weight: bold;
+  }
+  
+  li:only-child {
+    font-weight: normal;
+	}
+  
+  ul {
+    list-style: none;
+    margin-left: -0.8em;
+    
+    li {
+      position:relative;
+      padding-left: 0.7em;
+      margin-bottom: 0.1em;
+     
+      &:before {
+      content: '';
+      height: .3em;
+      width: .3em;
+      background: #000;
+      position: absolute;
+      transform: rotate(45deg);
+      top: .45em;
+      left: .15em;
+      }
+      
+      &:after {
+      content: ', 'attr(data-value);
+      }
+      
+    }
+    
+  }
+  
+}</code></pre>
             <p>
                <b>5.</b> Имеется строка <code>str</code> с произвольным текстом. Необходимо без использования циклов (for, while, do) и объявления дополнительных переменных, посчитать количество символов в строке, у которых ASCII код кратный 3. Напишите по возможности наиболее компактный код.
             </p>
+			<p><b>Решение:</b></p>
+			<pre class="language-css answer"><code>str.split('')
+    .map(function(x) {
+        return x.charCodeAt()
+    })
+    .filter(function(i) {
+        return i % 3 == 0;
+    })
+    .length</code></pre>
             <p>
                <b>6.</b> Дан массив целых чисел <code>input</code>. Необходимо написать функцию, которая преобразует массив <code>input</code> так, чтобы он удовлетворял следующим условиям:
             </p>
@@ -131,6 +211,18 @@ $('#x1 > div').eq(4)
             </ul>
             <pre class="language-js"><code>let input = [-2, 2, 4, 6, 8, 10, 3, 5, 7, 9, -1, -11];
 func(input); // [ 10, 8, 6, 4, 2, -2, -11, -1, 3, 5, 7, 9 ]</code></pre>
+			<p><b>Решение:</b></p>
+			<pre class="language-css answer"><code>function func(arr) {
+    let even = arr.filter(function(a) {
+        if (a % 2 == 0) { return a; }
+    });
+    let odd = arr.filter(function(a) {
+        if (a % 2 != 0) { return a; }
+    });
+
+    return even.sort(function(a, b) { return b - a; })
+        .concat(odd.sort(function(a, b) { return a - b; }));
+}</code></pre>
             <p>
                <b>7.</b> Предложите вариант базового класса для успешной работы следующего кода
             </p>
@@ -147,6 +239,8 @@ class MyClass extends BaseClass {
 let m = new MyClass();
 m.result(10, 20) === 90;
 m.result(20, 10) === 110;</code></pre>
+			<p><b>Решение:</b></p>
+			<pre class="language-css answer"><code>Скоро будет...</code></pre>
             <p>
                <b>8.</b> Предложите, на ваш взгляд, наилучший вариант селектора к элементу ниже, для отображения текста чёрным цветом, учитывая, что ваш селектор расположен в самом начале следующих стилей
             </p>
@@ -179,6 +273,8 @@ section.section {color: red}</code></pre>
 		return (Math.trunc(x) &lt;&lt; 0) ** 0b10;
 	}
 };</code></pre>
+			<p><b>Решение:</b></p>
+			<pre class="language-css answer"><code>Скоро будет...</code></pre>
          </div>
       </main>
    </body>
