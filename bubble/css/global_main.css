@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400');
+*{
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: #f6f6f6;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+header {
+  height: auto;
+}
+
+main {
+  flex: 1 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  width: 620px
+}
+
+footer {
+  height: 50px;
+  flex: 0 0 auto;
+  padding: 30px;
+}
+
+h1 {
+  padding: 30px;
+}
+
+.text {
+   margin: 10px 0;
+}
+
+button {
+  outline: none;
+  height: 40px;
+  text-align: center;
+  width: 130px;
+  border-radius: 40px;
+  background: #fff;
+  border: 2px solid #1ECD97;
+  color: #1ECD97;
+  letter-spacing: 1px;
+  text-shadow: 0;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button:hover {
+  color: white;
+  background: #1ECD97;
+}
+button:active {
+  letter-spacing: 2px;
+}
+
+button:disabled {
+   opacity: 0.6;
+   cursor: default;
+}
+
+button:disabled:hover {
+   opacity: 0.6;
+   cursor: default;
+   background: #fff;
+   color: #1ECD97;
+   letter-spacing: 1px;
+}
+
+.interface {
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+}
+
+.visual-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: auto;
+  margin: 0 auto;
+  height: 100px;
+}
+
+.sort-input {
+  margin-bottom: 10px;
+}
+
+#sort_set {
+  display: none;
+}
+
+.num {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: #000;
+  font-size: 25px;
+  margin-top: 25px;
+}
+
+.bubble {
+  width: 100px;
+  height: 100px;
+  background: #0077ee;
+  border-radius: 50%;
+  display: flex;
+}
+
+@keyframes numLeft{
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(180deg);}
+}
+@keyframes numRight{
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(-180deg);}
+}
