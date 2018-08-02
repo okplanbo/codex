@@ -8,9 +8,10 @@ $(document).ready(function() { // выполнять только после п�
   let swapped = 0;
   let timer = 0;
 
-// описание числа
+// описание элемента-числа
   class Num {
 
+// свойства объекта при создании
     constructor(value, order) {
       this.value = value;
       this.order = order;
@@ -24,7 +25,7 @@ $(document).ready(function() { // выполнять только после п�
       + this.value +'" style="order:'+ this.order +'">'
       + this.value + '</div>');
     }
-
+// новый порядок flex расположения для элемента
     set setOrder(newOrder) {
       this.order = newOrder;
       $('#'+this.id).css("order", this.order);
@@ -52,6 +53,7 @@ $(document).ready(function() { // выполнять только после п�
       return;
     }
 
+// завершить выполнение, если при последнем проходе ничего не поменялось
     if (j == len-1-i && swapped == 0) {
       i = len-1;
       return;
@@ -64,17 +66,20 @@ $(document).ready(function() { // выполнять только после п�
       return;
     }
 
+// поместить 2 элемента-числа в синий круг, стилизовать
     let tags = $('*[id="'+numsObj[j].id+'"], *[id="'+numsObj[j+1].id+'"]');
     tags.wrapAll('<div class="bubble" style="order:'+j+'"></div>');
     $('#'+numsObj[j].id).css('color', 'white');
     $('#'+numsObj[j+1].id).css('color', 'white');
 
+// поменять местами элементы, если правое число больше левого
     if (numsObj[j].value > numsObj[j+1].value) {
       swapped = 1;
       $('.bubble').css('animation', 'numRight 0.5s ease');
       $('#'+numsObj[j].id).css('animation', 'numLeft 0.5s ease');
       $('#'+numsObj[j+1].id).css('animation', 'numLeft 0.5s ease');
 
+// установить таймер для плавного завершения анимацию до смены позиции блоков
       setTimeout(function() {
         let tempObj = numsObj[j+1];
         let tempOrd = numsObj[j+1].order;
@@ -85,35 +90,46 @@ $(document).ready(function() { // выполнять только после п�
         let temp = nums[j+1];
         nums[j+1] = nums[j];
         nums[j] = temp;
-        numberOfComparisons++;
         j++;
       }, 500);
     } else {
-      numberOfComparisons++;
       j++;
     }
+    numberOfComparisons++;
+// убрать анимацию на обработанных числах
     setTimeout(function() {
-      clear();
+      clearAnimation();
     }, 500);
 
   }
 
-// вывод новых перемешанных чисел
-  $("#show_set").click(function() {
-    i = 0; j = 0; // обнуляем счётчики для сортировки, удаляем старые данные
-    clearInterval(timer);
+// вывод рандомных чисел по кнопке "новые данные"
+  $("#show_nums").click(function() {
+    i = 0; j = 0; // обнулить счётчики для сортировки
+    clearInterval(timer); // остановить функцию сортировки
+    clearAnimation(); // остановить анимацию
+    $('#show_nums').attr('disabled','disabled');
     $('.visual-wrapper').empty();
     $('.nums-output').empty();
-    let str = 'Исходные данные: ';
-    nums = getRandomSet(10); // выводим числа из массива
-    nums.forEach(function(item) {
-      str += item + ', ';
-    });
-// убрать запятую и пробел
-    $('.nums-input').text(str.substr(0,str.length-2));
-    $('#sort_set').css('display','inline');
-    $('#sort_set').removeAttr('disabled'); // разблокируем кнопку сортировки
-    drawNums('.visual-wrapper');
+    $('#sort_nums').removeClass('onclick');
+    $('#show_nums').css('margin-top', '0px');
+    $(".header-done").css('display', 'none');
+
+// таймаут для генерации нового массива чисел и объектов
+    setTimeout(function() {
+      i = 0; j = 0;
+      nums = getRandomSet(10); // новые рандомные числа
+      let str = 'Исходные данные: ';
+      drawNums('.visual-wrapper'); // создать объекты, поместить в массив
+      nums.forEach(function(item) {
+        str += item + ', ';
+      });
+// вывести числа через запятую, убрать в конце запятую и пробел
+      $('.nums-input').text(str.substr(0,str.length-2));
+      $('#sort_nums').css('display','inline');
+      $('#sort_nums').removeAttr('disabled'); // разблокируем кнопку сортировки
+
+    }, 400);
   });
 
 // функция для наполнения массива объектами и отрисовки чисел
@@ -124,34 +140,40 @@ $(document).ready(function() { // выполнять только после п�
     });
     numsObj.forEach(function(a) {
       a.draw(place);
+      $('#show_nums').removeAttr('disabled');
     });
   }
 
+// выводим результат из массива чисел nums[] через запятую для копирования
   function showResult() {
     let str = 'Результат: ';
     nums.forEach(function(item) {
       str += item + ', ';
     });
     $(".nums-output").text(str.substr(0,str.length-2));
+    $(".header-done").css('display','inline');
+    $('#sort_nums').removeClass('onclick');
   }
 
-  function clear() {
-    let tags = $('*[id="'+numsObj[j-1].id+'"], *[id="'+numsObj[j].id+'"]');
-    tags.unwrap();
-    tags.css('animation', '');
-    tags.css('color', '');
+// убрать синий круг
+  function clearAnimation() {
+    $('.bubble').children().css('animation', '');
+    $('.bubble').children().css('color', '');
+    $('.bubble').children().unwrap();
   }
 
-  $("#sort_set").click(function() {
+// кнопка сортировки
+  $("#sort_nums").click(function() {
     timer = setInterval(function() {
       BubbleSort(numsObj);
       if (i == numsObj.length-1) {
-        clearInterval(timer);
+        clearInterval(timer); // остановить сортировку
         showResult();
       }
     }, 1000);
 
-    $('#sort_set').attr('disabled','disabled');
+    $('#sort_nums').attr('disabled','disabled');
+    $('#sort_nums').addClass('onclick');
   });
 
 });

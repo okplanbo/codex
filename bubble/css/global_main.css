@@ -20,31 +20,38 @@ header {
   height: auto;
 }
 
+h1 {
+  padding: 20px;
+}
+
 main {
+  display: flex;
+  flex-direction: column;
   flex: 1 0 auto;
   background: #fff;
   border-radius: 10px;
-  padding: 20px;
-  margin: 20px;
-  width: 620px
+  padding: 30px;
+  margin: 10px;
+  width: 620px;
+  box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
-footer {
-  height: 50px;
-  flex: 0 0 auto;
-  padding: 30px;
-}
-
-h1 {
-  padding: 30px;
+section {
+  margin: 0;
+  padding: 0;
 }
 
 .text {
-   margin: 10px 0;
+   margin: 20px 0;
+}
+
+.buttons {
+  flex-direction: row;
 }
 
 button {
   outline: none;
+  flex-shrink: 0;
   height: 40px;
   text-align: center;
   width: 130px;
@@ -81,10 +88,33 @@ button:disabled:hover {
    letter-spacing: 1px;
 }
 
+.onclick {
+  width: 40px;
+  border-color: #bbbbbb;
+  border-width: 3px;
+  font-size: 0;
+  border-left-color: #1ECD97;
+  animation: rotating 2s 0.25s linear infinite;
+}
+.onclick:after {
+  content: "";
+}
+.onclick:hover {
+  color: #1ECD97;
+  background: white;
+}
+
 .interface {
+  display: flex;
   flex-direction: column;
   align-items: center;
-  height: 200px;
+  height: auto;
+  padding-top: 10px;
+}
+
+.header-done {
+  display: none;
+  #16A579;
 }
 
 .visual-wrapper {
@@ -100,8 +130,16 @@ button:disabled:hover {
   margin-bottom: 10px;
 }
 
-#sort_set {
+#sort_nums {
   display: none;
+}
+
+#sort_nums:after {
+  content: "Сотрировать";
+}
+
+#show_nums {
+  margin-top: 120px;
 }
 
 .num {
@@ -122,6 +160,51 @@ button:disabled:hover {
   display: flex;
 }
 
+.info {
+  display: flex;
+  justify-content: center;
+  min-height: 50px;
+  margin-top:auto;
+}
+
+.instructions-link {
+  align-self: center;
+  margin-top: 20px;
+  flex: 0 1 auto;
+  text-align: center;
+  cursor: pointer;
+  width: 110px;
+  height: 40px;
+}
+
+.instructions-link span {
+  color: #2d3644;
+  text-decoration: none;
+  border-bottom: 1px blue dotted;
+  font-size: 14px;
+}
+
+.instructions-link span:hover {
+  color: #0e680c;
+  text-decoration: none;
+  border-bottom: 1px blue dotted;
+}
+
+.instructions-text {
+  display: none;
+}
+
+footer {
+  height: 50px;
+  flex: 0 1 auto;
+  padding: 30px;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 @keyframes numLeft{
   0%{transform: rotate(0deg);}
   100%{transform: rotate(180deg);}
@@ -129,4 +212,35 @@ button:disabled:hover {
 @keyframes numRight{
   0%{transform: rotate(0deg);}
   100%{transform: rotate(-180deg);}
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 700px) {
+  main {
+    width: 400px;
+  }
+  footer {
+    height: 30px;
+    padding: 20px;
+  }
+  .num {
+    width: 37.5px;
+    height: 37.5px;
+    line-height: 37.5px;
+    font-size: 18.75px;
+    margin-top: 18.75px;
+  }
+
+  .bubble {
+    width: 75px;
+    height: 75px;
+  }
 }
