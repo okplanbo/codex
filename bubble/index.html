@@ -24,10 +24,23 @@
     <section class="info">
       <div class="text comparisons"></div>
       <div class="instructions-link">
-        <span>Инструкция</a>
-        <div class="instructions-text">
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <div class="toggle-wrapper">
+          <input type="checkbox" id="cbx" style="display:none"/>
+          <label for="cbx" class="toggle"><span></span></label>
         </div>
+        <span class="instruction-link-text">Показать инструкцию</span>
+      </div>
+      <div class="instructions-text faded">
+        <ol>
+          <li>
+            <p>Нажмите на кнопку "Новые данные" для формирования набора из 10 случайных чисел с минимумом&nbsp;1&nbsp;и&nbsp;максимумом&nbsp;50. Появится кнопка "Сортировать".</p>
+          </li>
+          <li>
+            <p>При&nbsp;нажатии "Сортировать" начнётся процесс сортировки чисел по возрастанию. В&nbsp;синем круге будут подсвечены пары чисел, которые сравниваются в данный момент.</p>
+            <p>Процесс может занять несколько минут. После его окончания отсортированный набор появится в отдельном поле для удобства копирования.</p>
+          </li>
+        </ol>
+        <p>Прервать сортировку можно нажав "Новые данные". Старые данные при этом будут заменены и утеряны, а сортировку можно будет начать заново.</p>
       </div>
     </section>
   </main>

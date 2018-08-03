@@ -171,9 +171,13 @@ $(document).ready(function() { // выполнять только после п�
         showResult();
       }
     }, 1000);
-
     $('#sort_nums').attr('disabled','disabled');
     $('#sort_nums').addClass('onclick');
+  });
+
+// анимация инструкции
+  $('.toggle').click(function() {
+    $('.instructions-text').toggleClass('faded');
   });
 
 });
