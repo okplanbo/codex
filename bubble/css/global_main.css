@@ -335,13 +335,36 @@ footer {
 @media (max-width: 700px) {
    main {
       width: 400px;
+      padding: 30px 10px;
    }
    footer {
       height: 30px;
       padding: 20px;
    }
    h1 {
-      font-size: 22px;
+      font-size: 28px;
+   }
+   button {
+      width: 270px;
+      height: 60px;
+      font-size: 25px;
+      margin: 10px 0;
+   }
+   .text {
+      font-size: 14px;
+      margin: 30px 5px
+   }
+   .interface {
+      padding-top: 25px;
+      height: 50vh;
+      flex: 0 1 auto;
+   }
+   .onclick {
+      border-radius: 50%;
+      width: 60px;
+   }
+   .visual-wrapper {
+      padding-top: 25px;
    }
    .num {
       width: 37.5px;
