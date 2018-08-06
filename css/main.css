@@ -1,9 +1,12 @@
 header {
-	margin-top:30px
+    margin-top:30px
 }
 main {
-	margin-bottom:30px
+    margin-bottom:30px
 }
 .answer {
     background: #f2fff6 !important
+}
+body #survey code[class*="language-"], body #survey pre[class*="language-"] {
+    font-size: 1rem;
 }

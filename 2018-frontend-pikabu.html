@@ -64,7 +64,7 @@
 			<blockquote>Вам необходимо знать JS, HTML5, CSS и обязательно добрую старую библиотеку jQuery ;) Хотя бы немножко знать о LESS, SASS, ECMAScript 6, Node.js, Gulp, Webpack, Underscore, JSDoc, VCS. Желать пользователям добра и лучшего UX.</blockquote>
 			<hr>
 		</header>
-		
+
       <main class="container">
          <div id="survey">
             <p>
@@ -74,7 +74,7 @@
             <p><b>Решение:</b></p>
 			<pre class="language-js answer"><code>var elem = document.getElementsByClassName('example')[0]
 elem.lastChild.nodeValue = ' - четыре'</code></pre>
-			
+
 			<p>
                <b>2.</b> Предположим в наследство Вам достался следующий код. Максимально упростите его с использованием библиотеки jQuery
             </p>
@@ -160,24 +160,24 @@ console.log('http://pikabu.ru#section_one ' + validate('http://pikabu.ru#section
 			<p><b>Решение:</b></p>
 			<pre class="language-css answer"><code>.example ul {
   list-style: disk;
-  
+
   li:first-child {
     font-weight: bold;
   }
-  
+
   li:only-child {
     font-weight: normal;
 	}
-  
+
   ul {
     list-style: none;
     margin-left: -0.8em;
-    
+
     li {
       position:relative;
       padding-left: 0.7em;
       margin-bottom: 0.1em;
-     
+
       &:before {
       content: '';
       height: .3em;
@@ -188,15 +188,15 @@ console.log('http://pikabu.ru#section_one ' + validate('http://pikabu.ru#section
       top: .45em;
       left: .15em;
       }
-      
+
       &:after {
       content: ', 'attr(data-value);
       }
-      
+
     }
-    
+
   }
-  
+
 }</code></pre>
             <p>
                <b>5.</b> Имеется строка <code>str</code> с произвольным текстом. Необходимо без использования циклов (for, while, do) и объявления дополнительных переменных, посчитать количество символов в строке, у которых ASCII код кратный 3. Напишите по возможности наиболее компактный код.
@@ -248,7 +248,18 @@ let m = new MyClass();
 m.result(10, 20) === 90;
 m.result(20, 10) === 110;</code></pre>
 			<p><b>Решение:</b></p>
-			<pre class="language-css answer"><code>Скоро будет...</code></pre>
+			<pre class="language-js answer"><code>set a(val) {
+  this.a1 = -val;
+}
+set b(val) {
+  this.b1 = -val;
+}
+get a() {
+  return this.a1;
+}
+get b() {
+  return this.b1;
+}</code></pre>
             <p>
                <b>8.</b> Предложите, на ваш взгляд, наилучший вариант селектора к элементу ниже, для отображения текста чёрным цветом, учитывая, что ваш селектор расположен в самом начале следующих стилей
             </p>
@@ -262,11 +273,12 @@ section.section {color: red}
 section#section {color: yellow}
 section#section.section {color: pink}
 section.section {color: red}</code></pre>
+			<p><b>Решение:</b></p>
+			<pre class="language-css answer"><code>body section#section.section {color:black;}</code></pre>
             <p>
                <b>9.</b> Предположим вам по наследству достался код с обильной избыточностью. <u>Максимально</u> упростите код (сократите или удалите ненужные операции), сохранив его логику.
             </p>
-            <pre class="language-js">
-			<code>const f = (x) =&gt; {
+            <pre class="language-js"><code>const f = (x) =&gt; {
 	let data,
 		x2 = new Number(`+${x}`),
 		x3 = x / {toNumber() {return 5}};
@@ -282,7 +294,9 @@ section.section {color: red}</code></pre>
 	}
 };</code></pre>
 			<p><b>Решение:</b></p>
-			<pre class="language-css answer"><code>Скоро будет...</code></pre>
+			<pre class="language-js answer"><code>const f = (x) => {
+	return (Math.trunc(x) << 0) ** 2;
+};</code></pre>
          </div>
       </main>
    </body>
