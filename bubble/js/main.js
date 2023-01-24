@@ -1,31 +1,29 @@
-$(document).ready(function() { // выполнять только после полной загрузки DOM
+$(document).ready(function() { // will be executed only if DOM is loaded and ready
 
+  // initial values
   let nums = [];
   let numsObj = [];
-  let numberOfComparisons = 0;
   let i = 0;
   let j = 0;
   let swapped = 0;
   let timer = 0;
 
-// описание элемента-числа
+// describing our element (single number)
   class Num {
-
-// свойства объекта при создании
     constructor(value, order) {
       this.value = value;
       this.order = order;
       this.id = order;
     }
 
-// метод отрисовки одного элемента-числа в указанном теге
+// drawing single element (number) in a given tag
     draw(place) {
       $(place)
       .append('<div class="num" id="'+ this.id +'" value="'
       + this.value +'" style="order:'+ this.order +'">'
       + this.value + '</div>');
     }
-// новый порядок flex расположения для элемента
+// change order of flex items
     set setOrder(newOrder) {
       this.order = newOrder;
       $('#'+this.id).css("order", this.order);
@@ -33,18 +31,18 @@ $(document).ready(function() { // выполнять только после п�
 
   }
 
-// генерация одного случайного целого числа от min до max
+// single number generation within given limits
   function getRandomNum(min, max) {
     return Math.round(Math.random() * (max - min) + min);
   }
 
-// создание массива случайных чисел от 1 до 50
-// используется стрелочная функция и Array.from()  (ES6)
+// creating array with random numbers
+// arrow function, Array.from(), ES6
   function getRandomSet(size) {
     return Array.from({length: size}, () => getRandomNum(1,50));
   }
 
-// пузырьковая сортировка по возрастанию
+// bubble sort from smallest to largest
   function BubbleSort(numsObj) {
 
     let len = numsObj.length;
@@ -53,7 +51,7 @@ $(document).ready(function() { // выполнять только после п�
       return;
     }
 
-// завершить выполнение, если при последнем проходе ничего не поменялось
+// stop if there is nothing else to swap
     if (j == len-1-i && swapped == 0) {
       i = len-1;
       return;
@@ -66,20 +64,20 @@ $(document).ready(function() { // выполнять только после п�
       return;
     }
 
-// поместить 2 элемента-числа в синий круг, стилизовать
+// place two numbers in a blue circle, apply styles
     let tags = $('*[id="'+numsObj[j].id+'"], *[id="'+numsObj[j+1].id+'"]');
     tags.wrapAll('<div class="bubble" style="order:'+j+'"></div>');
     $('#'+numsObj[j].id).css('color', 'white');
     $('#'+numsObj[j+1].id).css('color', 'white');
 
-// поменять местами элементы, если правое число больше левого
+// compare and swap animation
     if (numsObj[j].value > numsObj[j+1].value) {
       swapped = 1;
       $('.bubble').css('animation', 'numRight 0.5s ease');
       $('#'+numsObj[j].id).css('animation', 'numLeft 0.5s ease');
       $('#'+numsObj[j+1].id).css('animation', 'numLeft 0.5s ease');
 
-// установить таймер для плавного завершения анимацию до смены позиции блоков
+// timeout for smooth animation after position change
       setTimeout(function() {
         let tempObj = numsObj[j+1];
         let tempOrd = numsObj[j+1].order;
@@ -95,19 +93,18 @@ $(document).ready(function() { // выполнять только после п�
     } else {
       j++;
     }
-    numberOfComparisons++;
-// убрать анимацию на обработанных числах
+// remove animation for a sorted numbers
     setTimeout(function() {
       clearAnimation();
     }, 500);
 
   }
 
-// вывод рандомных чисел по кнопке "новые данные"
+// new random set (button handler)
   $("#show_nums").click(function() {
-    i = 0; j = 0; // обнулить счётчики для сортировки
-    clearInterval(timer); // остановить функцию сортировки
-    clearAnimation(); // остановить анимацию
+    i = 0; j = 0;
+    clearInterval(timer);
+    clearAnimation();
     $('#show_nums').attr('disabled','disabled');
     $('.visual-wrapper').empty();
     $('.nums-output').empty();
@@ -115,24 +112,24 @@ $(document).ready(function() { // выполнять только после п�
     $('#show_nums').css('margin-top', '0px');
     $(".header-done").css('display', 'none');
 
-// таймаут для генерации нового массива чисел и объектов
+// generating new array with data with timeout
     setTimeout(function() {
       i = 0; j = 0;
-      nums = getRandomSet(10); // новые рандомные числа
-      let str = 'Исходные данные: ';
-      drawNums('.visual-wrapper'); // создать объекты, поместить в массив
+      nums = getRandomSet(10); // adding random numbers
+      let str = 'Initial data: ';
+      drawNums('.visual-wrapper');
       nums.forEach(function(item) {
         str += item + ', ';
       });
-// вывести числа через запятую, убрать в конце запятую и пробел
+// render all nums with commas, remove blank space at the end
       $('.nums-input').text(str.substr(0,str.length-2));
       $('#sort_nums').css('display','inline');
-      $('#sort_nums').removeAttr('disabled'); // разблокируем кнопку сортировки
+      $('#sort_nums').removeAttr('disabled'); // enable sort button
 
     }, 400);
   });
 
-// функция для наполнения массива объектами и отрисовки чисел
+// filling array and drawing numbers
   function drawNums(place) {
     numsObj = [];
     nums.forEach(function(value, order) {
@@ -144,9 +141,9 @@ $(document).ready(function() { // выполнять только после п�
     });
   }
 
-// выводим результат из массива чисел nums[] через запятую для копирования
+// show result from the nums[] array 
   function showResult() {
-    let str = 'Результат: ';
+    let str = 'Result: ';
     nums.forEach(function(item) {
       str += item + ', ';
     });
@@ -155,19 +152,19 @@ $(document).ready(function() { // выполнять только после п�
     $('#sort_nums').removeClass('onclick');
   }
 
-// убрать синий круг
+// remove blue circle
   function clearAnimation() {
     $('.bubble').children().css('animation', '');
     $('.bubble').children().css('color', '');
     $('.bubble').children().unwrap();
   }
 
-// кнопка сортировки
+// sort button
   $("#sort_nums").click(function() {
     timer = setInterval(function() {
       BubbleSort(numsObj);
       if (i == numsObj.length-1) {
-        clearInterval(timer); // остановить сортировку
+        clearInterval(timer); // stop
         showResult();
       }
     }, 1000);
@@ -175,7 +172,7 @@ $(document).ready(function() { // выполнять только после п�
     $('#sort_nums').addClass('onclick');
   });
 
-// анимация инструкции
+// hint text animation
   $('.toggle').click(function() {
     $('.instructions-text').toggleClass('faded');
   });
