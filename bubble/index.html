@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -7,19 +7,18 @@
     <link href="css/normalize.css" rel="stylesheet" media="all" />
     <link href="css/global_main.css" rel="stylesheet" media="all" />
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
-    <title>Визуализация пузырьковой сортировки</title>
+    <title>Bubble sort visualization</title>
   </head>
   <body>
   <header>
-    <h1>Пузырьковая сортировка</h1>
+    <h1>Bubble sort</h1>
   </header>
   <main>
     <section class="interface">
-      <button id="show_nums">Новые данные</button>
+      <button id="show_nums">New data</button>
       <div class="text nums-input"></div>
       <button id="sort_nums"></button>
       <div class="text nums-output"></div>
-      <h2 class="header-done">Данные отсортированы!</h2>
     </section>
     <section class="visual-wrapper"></section>
     <section class="info">
@@ -29,19 +28,19 @@
           <input type="checkbox" id="cbx" style="display:none"/>
           <label for="cbx" class="toggle"><span></span></label>
         </div>
-        <span class="instruction-link-text">Показать инструкцию</span>
+        <span class="instruction-link-text">Hint</span>
       </div>
       <div class="instructions-text faded">
         <ol>
           <li>
-            <p>Нажмите на кнопку "Новые данные" для формирования набора из 10 случайных чисел с минимумом&nbsp;1&nbsp;и&nbsp;максимумом&nbsp;50. Появится кнопка "Сортировать".</p>
+            <p>Pressing the "New data" button will create a set of 10 random numbers (min value is &nbsp;1&nbsp;and&nbsp;max&nbsp;is&nbsp;50.</p>
           </li>
           <li>
-            <p>При&nbsp;нажатии "Сортировать" начнётся процесс сортировки чисел по возрастанию. В&nbsp;синем круге будут подсвечены пары чисел, которые сравниваются в данный момент.</p>
-            <p>Процесс может занять несколько минут. После его окончания отсортированный набор появится в отдельном поле для удобства копирования.</p>
+            <p>"Start sorting" button will start animated compare-and-swap process. It may take several minutes.</p>
+            <p>Reordered set will appear in a separate field for user convenience if there will be difficulties with selection of animated objects.</p>
           </li>
         </ol>
-        <p>Прервать сортировку можно нажав "Новые данные". Старые данные при этом будут заменены и утеряны, а сортировку можно будет начать заново.</p>
+        <p>If "New data" button is pressed in the process, sorting will be stopped. Old data will be lost and replaced with newly generated array.</p>
       </div>
     </section>
   </main>

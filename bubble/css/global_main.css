@@ -59,7 +59,7 @@ li {
 }
 
 .text {
-   margin: 20px 0;
+   margin: 25px 0;
    font-size: 15px;
 }
 
@@ -135,7 +135,7 @@ button:disabled:hover {
 
 .header-done {
    display: none;
-   #16A579;
+   color: #16A579;
 }
 
 .visual-wrapper {
@@ -156,7 +156,7 @@ button:disabled:hover {
 }
 
 #sort_nums:after {
-   content: "Сотрировать";
+   content: "Start sorting";
 }
 
 #show_nums {
