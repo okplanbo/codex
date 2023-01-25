@@ -194,7 +194,6 @@ button:disabled:hover {
    margin-top: 20px;
    flex: 0 1 auto;
    text-align: center;
-   width: 230px;
    height: 30px;
    display: flex;
    flex-direction: row;
@@ -294,6 +293,11 @@ footer {
    height: 50px;
    flex: 0 1 auto;
    padding: 30px;
+}
+
+.home-link {
+   margin-left: 10px;
+   color: #5d5d5d;
 }
 
 @keyframes fadein {
