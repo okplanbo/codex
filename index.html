@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <title>Testing / front-end software engineer / 2018</title>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
+	  <link rel="stylesheet" href="css/main.css">
+	  <!-- Bootstrap CSS -->
+	  <link rel="stylesheet" href="css/bootstrap.min.css">
+	  <!-- Prism -->
+	  <link rel="stylesheet" href="css/prism.css">
+	  <script src="js/prism.min.js"></script>
+	</head>
+	<body>
+	<script>
+		(function () {
+
+			if (
+				(typeof self === 'undefined' || !self.Prism) &&
+				(typeof global === 'undefined' || !global.Prism)
+			) {
+				return;
+			}
+
+			var options = {};
+			Prism.plugins.customClass = {
+				map: function map(cm) {
+					options.classMap = cm;
+				},
+				prefix: function prefix(string) {
+					options.prefixString = string;
+				}
+			}
+
+			Prism.hooks.add('wrap', function (env) {
+				if (!options.classMap && !options.prefixString) {
+					return;
+				}
+				env.classes = env.classes.map(function (c) {
+					return (options.prefixString || '') + (options.classMap[c] || c);
+				});
+			});
+
+		})();
+		Prism.plugins.customClass.map({
+			keyword: 'keyword',
+			string: 'string',
+			comment: 'comment'
+		});
+		Prism.plugins.customClass.prefix('prism--');
+	</script>
+		<header class="container">
+			<h1>Pre-interview testing for a front-end software engineer position in 2018</h1>
+			<blockquote>Description: required skills were Vanilla JS, HTML5, CSS + some experience with good old jQuery library :) Basic knowledge of LESS, SASS, ECMAScript 6, Node.js, Gulp, Webpack, Underscore, JSDoc, VCS. And a strong desire to make UX better.</blockquote>
+			<hr>
+		</header>
+
+      <main class="container">
+         <div id="survey">
+            <p>
+               <b>1.</b> Replace a piece of text in an HTML fragment below using only Vanilla JavaScript. Leave <code>&lt;span&gt;</code> element untouched.
+            </p>
+            <pre class="language-html"><code>&lt;div class=&quot;example&quot;&gt;Two plus two &lt;span&gt;equals&lt;/span&gt; - five&lt;/div&gt;</code></pre>
+            <p><b>Solution:</b></p>
+			<pre class="language-js answer"><code>var elem = document.getElementsByClassName('example')[0]
+elem.lastChild.nodeValue = ' - four'</code></pre>
+
+			<p>
+               <b>2.</b> Let's assume that you have such legacy code in your project. Simplify it as much as possible using jQuery
+            </p>
+            <pre class="language-js"><code>document.getElementById('x1')
+            .getElementsByTagName('div')[4]
+            .closest('#x1 &gt; div').parentNode
+            .childNodes[2].firstChild
+            .querySelect('*[id="f"]')
+            .textContent = 'Hello!';</code></pre>
+			<p><b>Solution:</b></p>
+			<pre class="language-js answer"><code>// * childNodes[2] and children(':eq(2)') will both work the same if there is no extra symbols between html tags 
+
+$('#x1 &gt; div').eq(4)
+			  .parent('div#x1').children(':eq(2)')
+			  .children(':first-child')
+			  .find('#f').text('Hello!');</code></pre>
+			<p>
+               <b>3.</b> Using RegExp write a URL validation function. Valid URL-s shall meet the following criteria:
+            </p>
+            <ul>
+               <li>Transfer protocols: http, https or ftp;</li>
+               <li>Allowed third-level domains: m, m-test, c1...c100;</li>
+               <li>Second-level domain name must be "website";</li>
+               <li>Port number 8080 is the only one allowed if specified;</li>
+               <li>URL must not contain any path, parameters (query string), anchor (hash mark).</li>
+            </ul>
+            <br>
+            <p>
+               Valid example URL: <code>https://c52.website.lh:8080</code>
+            </p>
+			<p><b>Solution:</b></p>
+			<pre class="language-js answer"><code>function validate(url) {
+	const r = /^(ftp|https?):\/\/((c[1-9][0-9]?|m|m-test)\.)?website\.[a-zA-Z\-]{2,64}(:8080)?$/;
+	return r.test(url);
+}
+
+// test!
+
+// good cases:
+console.log('https://c52.website.lh:8080 ' + validate('https://c52.website.lh:8080'));
+console.log('http://c52.website.lh:8080 ' + validate('http://c52.website.lh:8080'));
+console.log('ftp://c52.website.lh:8080 ' + validate('ftp://c52.website.lh:8080'));
+console.log('http://m.website.lh:8080 ' + validate('http://m.website.lh:8080'));
+console.log('http://m-test.website.lh:8080 ' + validate('http://m-test.website.lh:8080'));
+console.log('http://c82.website.lh:8080 ' + validate('http://c82.website.lh:8080'));
+console.log('http://c82.website.lh:8080 ' + validate('http://c82.website.lh:8080'));
+console.log('http://c82.website.lh ' + validate('http://c82.website.lh'));
+console.log('http://c82.website.ua ' + validate('http://c82.website.ua'));
+console.log('http://website.ua ' + validate('http://website.ua'));
+
+// bad cases:
+console.log('sftp://c52.website.lh:8080 ' + validate('sftp://c52.website.lh:8080'));
+console.log('ftp://c52.website.lh:8081 ' + validate('ftp://c52.website.lh:8081'));
+console.log('ftp://k.website.lh:8080 ' + validate('ftp://k.website.lh:8080'));
+console.log('ftp://k-test.website.lh:8080 ' + validate('ftp://k-test.website.lh:8080'));
+console.log('ftp://c102.website.lh:8080 ' + validate('ftp://c102.website.lh:8080'));
+console.log('http://c10.vebsite.lh:8080 ' + validate('http://c10.vebsite.lh:8080'));
+console.log('http://c10..org:8080 ' + validate('http://c10..org:8080'));
+console.log('http://website.org:8080/page ' + validate('http://website.org:8080/page'));
+console.log('http://website.org:8080?param=true ' + validate('http://website.org:8080?param=true'));
+console.log('http://website.ua#section_one ' + validate('http://website.ua#section_one'));</code></pre>
+            <p>
+               <b>4.</b> Apply styles (LESS or SASS) to a list below to match it's view with expected result on a screenshot:
+            </p>
+            <pre class="language-html"><code>&lt;div class=&quot;example&quot;&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Item 1&lt;/li&gt;
+        &lt;li&gt;Item 2
+            &lt;ul&gt;
+                &lt;li data-value=&quot;1&quot;&gt;sub-item&lt;/li&gt;
+                &lt;li data-value=&quot;2&quot;&gt;sub-item&lt;/li&gt;
+                &lt;li data-value=&quot;3&quot;&gt;sub-item&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Item 3
+            &lt;ul&gt;
+                &lt;li data-value=&quot;4&quot;&gt;sub-item&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+            <img src="img/1523562799194851279.png" alt=""><br>
+			<p><b>Solution:</b></p>
+			<pre class="language-css answer"><code>.example ul {
+  list-style: disk;
+
+  li:first-child {
+    font-weight: bold;
+  }
+
+  li:only-child {
+    font-weight: normal;
+	}
+
+  ul {
+    list-style: none;
+    margin-left: -0.8em;
+
+    li {
+      position:relative;
+      padding-left: 0.7em;
+      margin-bottom: 0.1em;
+
+      &:before {
+      content: '';
+      height: .3em;
+      width: .3em;
+      background: #000;
+      position: absolute;
+      transform: rotate(45deg);
+      top: .45em;
+      left: .15em;
+      }
+
+      &:after {
+      content: ', 'attr(data-value);
+      }
+
+    }
+
+  }
+
+}</code></pre>
+            <p>
+               <b>5.</b> Count how many characters which ASCII code is a multiple of 3 in a string <code>str</code> without using loops (for, while, do) and additional variables. Make your code as compact as possible.
+            </p>
+			<p><b>Solution:</b></p>
+			<pre class="language-css answer"><code>str.split('')
+    .map(char =&gt; char.charCodeAt())
+    .filter(charCode =&gt; charCode % 3 == 0)
+    .length</code></pre>
+            <p>
+               <b>6.</b> Create a function that will transform an array of integers to match following conditions:
+            </p>
+            <ul>
+               <li>at the beginning are multiples of two sorted from largest to smallest;</li>
+               <li>next all the rest integers, from smallest to largest.</li>
+            </ul>
+            <pre class="language-js"><code>const input = [-2, 2, 4, 6, 8, 10, 3, 5, 7, 9, -1, -11];
+func(input); // [ 10, 8, 6, 4, 2, -2, -11, -1, 3, 5, 7, 9 ]</code></pre>
+			<p><b>Solution:</b></p>
+			<pre class="language-css answer"><code>function func(arr) {
+    const even = arr.filter(function(a) {
+        if (a % 2 == 0) { return a; }
+    });
+    const odd = arr.filter(function(a) {
+        if (a % 2 != 0) { return a; }
+    });
+
+    return even.sort(function(a, b) { return b - a; })
+        .concat(odd.sort(function(a, b) { return a - b; }));
+}</code></pre>
+            <p>
+               <b>7.</b> Define a BaseClass with which the expressions on the last two lines will become true
+            </p>
+            <pre class="language-js"><code>class BaseClass {
+    // ... your code
+}
+class MyClass extends BaseClass {
+    result(a, b) {
+        this.a = a;
+        this.b = b;
+        return 100 - this.a + this.b;
+    }
+}
+let m = new MyClass();
+m.result(10, 20) === 90;
+m.result(20, 10) === 110;</code></pre>
+			<p><b>Solution:</b></p>
+			<pre class="language-js answer"><code>set a(val) {
+  this.a1 = -val;
+}
+set b(val) {
+  this.b1 = -val;
+}
+get a() {
+  return this.a1;
+}
+get b() {
+  return this.b1;
+}</code></pre>
+            <p>
+               <b>8.</b> Figure out the best CSS selector to paint text below in black color. Consider the rest of the CSS code that must stay below.
+            </p>
+            <pre class="language-html"><code>&lt;section class=&quot;section&quot; id=&quot;section&quot;&gt;Green text&lt;/section&gt;</code></pre>
+            <pre class="language-css"><code>// &lt;-- Your selector
+
+// ...
+
+section.section {color: red}
+.section {color: green}
+section#section {color: yellow}
+section#section.section {color: pink}
+section.section {color: red}</code></pre>
+			<p><b>Solution:</b></p>
+			<pre class="language-css answer"><code>body section#section.section {color:black;}</code></pre>
+            <p>
+               <b>9.</b> Simplify following function <u>as much as possible</u>.
+            </p>
+            <pre class="language-js"><code>const f = (x) =&gt; {
+	let data,
+		x2 = new Number(`+${x}`),
+		x3 = x / {toNumber() {return 5}};
+	data = {
+		isX: x3 === x3,
+		d: Boolean(34),
+		n: x === x2,
+	};
+	if (!!data.isX ? data.d : data.n) {
+		return Math.ceil(x) &gt;&gt; x2;
+	} else {
+		return (Math.trunc(x) &lt;&lt; 0) ** 0b10;
+	}
+};</code></pre>
+			<p><b>Solution:</b></p>
+			<pre class="language-js answer"><code>const f = (x) =&gt; {
+	return (Math.trunc(x) &lt;&lt; 0) ** 2;
+};</code></pre>
+         </div>
+      </main>
+      <footer>
+        © 2018 <a href="/" class="home-link">Home</a>
+      </footer>
+   </body>
+</html>
